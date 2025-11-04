@@ -1,0 +1,9 @@
+{
+  "calculateTotal": {
+    "version": "1.0",
+    "enabled": true,
+    "file": "calculateTotal.lua",
+    "checksum": "placeholder",
+    "size": 0
+  }
+}
