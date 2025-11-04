@@ -1,4 +1,4 @@
-package com.mobilectl.hotpatch_poc.ui.theme
+package com.mobilectl.hotpatch.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

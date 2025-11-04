@@ -1,9 +1,12 @@
-package com.mobilectl.hotpatch_poc.patch
+package com.mobilectl.hotpatch.patch
 
 import android.content.Context
-import com.mobilectl.hotpatch_poc.CartItem
-import com.mobilectl.hotpatch_poc.LuaRuntime
-import com.mobilectl.hotpatch_poc.service.PaymentService
+import com.mobilectl.hotpatch.CartItem
+import com.mobilectl.hotpatch.LuaRuntime
+import com.mobilectl.hotpatch.service.PaymentService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -53,8 +56,10 @@ object PatchRuntime {
      */
     private fun loadLuaPatch(context: Context) {
         try {
-            PatchLoader.loadPatchFromAssets(context, "payment_fix.lua").also { luaCode ->
-                LuaRuntime.loadString(luaState, luaCode)
+            CoroutineScope(Dispatchers.IO).launch {
+                PatchLoader.loadFromUrl(context).also { luaCode ->
+                    luaCode?.let { LuaRuntime.loadString(luaState, it) }
+                }
             }
 
             println("✅ Lua patch loaded")
@@ -102,6 +107,7 @@ object PatchRuntime {
             service.calculateTotal(items)
         }
     }
+
     /**
      * Cleanup when app closes
      */

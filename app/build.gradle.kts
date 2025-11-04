@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mobilectl.hotpatch_poc"
+    namespace = "com.mobilectl.hotpatch"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.mobilectl.hotpatch_poc"
+        applicationId = "com.mobilectl.hotpatch"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

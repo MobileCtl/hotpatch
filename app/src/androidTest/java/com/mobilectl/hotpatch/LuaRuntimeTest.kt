@@ -1,4 +1,4 @@
-package com.mobilectl.hotpatch_poc
+package com.mobilectl.hotpatch
 
 import org.junit.After
 import org.junit.Assert

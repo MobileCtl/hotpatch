@@ -1,4 +1,4 @@
-package com.mobilectl.hotpatch_poc
+package com.mobilectl.hotpatch
 
 data class CartItem(
     val name: String,

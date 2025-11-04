@@ -1,6 +1,6 @@
-package com.mobilectl.hotpatch_poc.service
+package com.mobilectl.hotpatch.service
 
-import com.mobilectl.hotpatch_poc.CartItem
+import com.mobilectl.hotpatch.CartItem
 
 class PaymentService {
     fun calculateTotal(items: List<CartItem>): Double {

@@ -1,4 +1,4 @@
-package com.mobilectl.hotpatch_poc
+package com.mobilectl.hotpatch
 
 import org.keplerproject.luajava.LuaState
 import org.keplerproject.luajava.LuaStateFactory

@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "hotpatch-poc"
+rootProject.name = "Hotpatch"
 include(":app")
  

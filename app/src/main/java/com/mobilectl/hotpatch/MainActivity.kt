@@ -1,4 +1,4 @@
-package com.mobilectl.hotpatch_poc
+package com.mobilectl.hotpatch
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -25,16 +25,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.mobilectl.hotpatch_poc.patch.PatchRuntime
-import com.mobilectl.hotpatch_poc.service.PaymentService
-import com.mobilectl.hotpatch_poc.ui.theme.HotpatchpocTheme
+import com.mobilectl.hotpatch.patch.PatchRuntime
+import com.mobilectl.hotpatch.service.PaymentService
+import com.mobilectl.hotpatch.ui.theme.HotpatchTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            HotpatchpocTheme {
+            HotpatchTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
                         PaymentCalculatorScreen()
@@ -142,7 +142,7 @@ fun PaymentCalculatorScreen() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    HotpatchpocTheme {
+    HotpatchTheme {
         PaymentCalculatorScreen()
     }
 }
