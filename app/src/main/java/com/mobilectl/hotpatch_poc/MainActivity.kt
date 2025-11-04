@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -52,7 +53,7 @@ fun PaymentCalculatorScreen() {
     val service = remember { PaymentService() }
     var isPatchEnabled by remember { mutableStateOf(false) }
     var totalPrice by remember { mutableStateOf(0.0) }
-
+    val context = LocalContext.current
     // Sample items
     val items = remember {
         listOf(
@@ -126,7 +127,7 @@ fun PaymentCalculatorScreen() {
         Button(
             onClick = {
                 isPatchEnabled = !isPatchEnabled
-                PatchRuntime.enablePatching(isPatchEnabled)
+                PatchRuntime.enablePatching(isPatchEnabled, context = context)
                 if (isPatchEnabled) {
                     println("✅ Patching ENABLED")
                 } else {

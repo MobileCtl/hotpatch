@@ -1,5 +1,6 @@
 package com.mobilectl.hotpatch_poc.patch
 
+import android.content.Context
 import com.mobilectl.hotpatch_poc.CartItem
 import com.mobilectl.hotpatch_poc.LuaRuntime
 import com.mobilectl.hotpatch_poc.service.PaymentService
@@ -31,12 +32,12 @@ object PatchRuntime {
     /**
      * Enable/disable patching
      */
-    fun enablePatching(enable: Boolean) {
+    fun enablePatching(enable: Boolean, context: Context) {
         shouldPatch = enable
 
         if (enable) {
             // Load Lua patch when enabled
-            loadLuaPatch()
+            loadLuaPatch(context)
         }
     }
 
@@ -50,38 +51,12 @@ object PatchRuntime {
     /**
      * Load the Lua patch code
      */
-    private fun loadLuaPatch() {
+    private fun loadLuaPatch(context: Context) {
         try {
-            val luaCode = """
-            -- Simple JSON parser for Lua
-            function decodeJson(jsonStr)
-                -- Remove brackets and split
-                local items = {}
-                -- This is simplified - in production use a real JSON library
-                for match in jsonStr:gmatch('{[^}]*}') do
-                    table.insert(items, match)
-                end
-                return items
-            end
-            
-            function calculateTotalFromJson(jsonStr)
-                print("DEBUG Lua: received JSON: " .. jsonStr)
-                
-                -- Parse JSON manually (super simple)
-                local total = 0.0
-                
-                -- Extract prices and quantities from JSON
-                for price, qty in jsonStr:gmatch('"price":(%-?%d+%.?%d*)[^}]*"quantity":(%d+)') do
-                    local itemTotal = tonumber(price) * tonumber(qty) * 1.15
-                    total = total + itemTotal
-                end
-                
-                print("DEBUG Lua: total=" .. total)
-                return total
-            end
-        """
+            PatchLoader.loadPatchFromAssets(context, "payment_fix.lua").also { luaCode ->
+                LuaRuntime.loadString(luaState, luaCode)
+            }
 
-            LuaRuntime.loadString(luaState, luaCode)
             println("✅ Lua patch loaded")
         } catch (e: Exception) {
             println("❌ Failed to load Lua patch: ${e.message}")
