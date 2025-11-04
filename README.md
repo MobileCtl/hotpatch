@@ -73,7 +73,7 @@ This is a proof-of-concept project. Feedback and contributions welcome!
 ## 🗺️ Roadmap
 
 ### MVP (Phase 1)
-- [ ] Remote patches from GitHub ✨ **NEXT**
+- [x] Remote patches from GitHub ✨ **NEXT**
 - [ ] Automated patch discovery
 - [ ] Patch versioning & rollback
 - [ ] Production demo
